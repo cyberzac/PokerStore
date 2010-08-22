@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ongame.pokerstore</groupId>
+    <artifactId>pokerstore</artifactId>
+    <packaging>pom</packaging>
+    <inceptionYear>2008</inceptionYear>
+    <name>Pokerstore Super POM</name>
+
+    <version>1.1</version>
+
+    <modules>
+        <module>api</module>
+        <module>solution</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>java.net2</id>
+            <url>http://download.java.net/maven/2</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>java.net2</id>
+            <url>http://download.java.net/maven/2</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Codehaus Snapshots</id>
+            <url>http://snapshots.repository.codehaus.org/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <!-- COMPILER - use 1.5 compability -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <!-- SUREFIRE (aka JUnit/TestNG) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <skip>${skip.tests}</skip>
+                    <forkMode>once</forkMode>
+                    <childDelegation>false</childDelegation>
+                </configuration>
+            </plugin>
+            <!-- IDEA project files generation -->
+            <!-- See: http://maven.apache.org/plugins/maven-idea-plugin/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <jdkName>1.5</jdkName>
+                    <jdkLevel>1.5</jdkLevel>
+                    <linkModules>true</linkModules>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <downloadSources>true</downloadSources>
+                </configuration>
+            </plugin>
+            <!-- Eclipse project files generation -->
+            <!-- See: http://maven.apache.org/plugins/maven-eclipse-plugin/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <useProjectReferences>false</useProjectReferences>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <downloadSources>true</downloadSources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>all</id>
+            <modules>
+                <module>api</module>
+                <module>solution</module>
+                <!--
+                <module>dist</module>
+                <module>reference</module>
+                -->
+            </modules>
+        </profile>
+    </profiles>
+
+    <properties>
+        <skip.tests>false</skip.tests>
+    </properties>
+</project>

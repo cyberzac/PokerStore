@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="pokerstore" default="all" basedir=".">
+    <target name="prepare">
+        <property name="api.src.dir" value="api/src/main/java"/>
+        <property name="main.src.dir" value="solution/src/main/java"/>
+        <property name="test.src.dir" value="solution/src/test/java"/>
+        <property name="build.dir" value="target"/>
+        <property name="lib.dir" value="lib"/>
+
+        <property name="main.build.dir" value="${build.dir}/classes"/>
+        <property name="test.build.dir" value="${build.dir}/test-classes"/>
+        <property name="dist.dir" value="${build.dir}/dist"/>
+
+        <mkdir dir="${main.build.dir}"/>
+        <mkdir dir="${test.build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="prepare">
+        <javac destdir="${main.build.dir}">
+            <src>
+                <pathelement location="${api.src.dir}"/>
+                <pathelement location="${main.src.dir}"/>
+            </src>
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </classpath>
+        </javac>
+
+        <javac destdir="${test.build.dir}">
+            <src>
+                <pathelement location="${api.src.dir}"/>
+                <pathelement location="${main.src.dir}"/>
+                <pathelement location="${test.src.dir}"/>
+            </src>
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile">
+    </target>
+
+    <target name="test" depends="dist">
+        <junit haltonerror="true" haltonfailure="true" fork="true" forkmode="once">
+            <formatter type="brief"/>
+            <batchtest todir="${build.dir}">
+                <fileset dir="${test.build.dir}" includes="**/*Test.class"/>
+            </batchtest>
+            <classpath>
+                <!--<pathelement location="${api.build.dir}"/>-->
+                <pathelement location="${main.build.dir}"/>
+                <pathelement location="${test.build.dir}"/>
+                <fileset dir="lib" includes="**/*.jar"/>
+            </classpath>
+        </junit>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="all" depends="clean, dist"/>
+</project>

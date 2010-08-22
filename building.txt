@@ -1,0 +1,65 @@
+POKERSTORE BUILDING INSTRUCTIONS
+Version 1.1
+================================
+
+Welcome to Pokerstore!
+
+This directory contains the Pokerstore work test source code, documentation and build files.
+For solution requirements please read "pokerstore_worktest.pdf".
+
+Prerequisites
+-------------
+
+In order to build and run the project you will need the following tools:
+
+ * JDK 1.5 or 1.6
+   http://java.sun.com/javase/downloads
+
+ * Apache Ant 1.7+
+   http://ant.apache.org
+
+ * Apache Maven 2.0+ (OPTIONAL, read below)
+   http://maven.apache.org
+
+Quick Build Instructions for Ant
+--------------------------------
+
+To compile, package and test your solution:
+
+    ant test
+
+To clean all generated files:
+
+    ant clean
+
+If you add framework dependencies to your solution, dont forget to all jars needed to
+the lib directory.     
+
+Build Instructions for Maven
+----------------------------
+
+Maven is an optional build and project management tool for Pokerstore.
+
+NOTE: It's not a requirement to use or support Maven in the Pokestore solution. 
+
+Skeletal pom.xml's are available however if you should choose to use it. For further usage
+instructions see the official Maven documentation. 
+
+If you use Maven, remver to add any framework dependencies for your solution in the dependencies
+section of pom.xml. Dont put any jars in the lib directory as you would otherwise when using Ant.
+
+To compile and test your solution, run:
+
+    mvn test -Dskip.tests=false
+
+Clean all generated files:
+
+    mvn clean
+
+Generate IntelliJ project files:
+
+    mvn idea:idea
+
+Generate Eclipse project files:
+
+    mvn eclipse:eclipse
