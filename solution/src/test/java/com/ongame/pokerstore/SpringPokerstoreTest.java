@@ -114,11 +114,12 @@ public class SpringPokerstoreTest {
     public void outOfStock() {
         String hp = "HP Proliant 380DL";
         backOfficeService.stock(hp, price, inventory);
-        assertTrue("No products should be out of stock.", backOfficeService.getOutOfStock().isEmpty());
+        List<String> outOfStock = backOfficeService.getOutOfStock();
+        assertTrue("No products should be out of stock.", outOfStock.isEmpty());
         backOfficeService.setCustomerCredit(CUSTOMER, price * inventory * 4);
 
         storeFrontService.purchase(DELL, CUSTOMER, inventory);
-        List<String> outOfStock = backOfficeService.getOutOfStock();
+        outOfStock = backOfficeService.getOutOfStock();
         assertEquals("Wrong number of products out of stock", 1, outOfStock.size());
         assertEquals("Expected " + DELL + " to be out of stock", DELL, outOfStock.get(0));
 
@@ -134,11 +135,4 @@ public class SpringPokerstoreTest {
         }
     }
 
-    /**
-     * Test concurrency
-     */
-    @Test
-    public void concurrency() {
-
-    }
 }

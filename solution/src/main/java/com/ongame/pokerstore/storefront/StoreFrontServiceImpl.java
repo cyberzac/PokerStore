@@ -6,8 +6,6 @@ import com.ongame.pokerstore.model.Customer;
 import com.ongame.pokerstore.model.Product;
 import com.ongame.pokerstore.model.StoreDAO;
 import com.ongame.pokerstore.supplier.SupplierService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,8 +64,8 @@ public class StoreFrontServiceImpl implements StoreFrontService {
         }
         customer.setCredit(credit - orderValue);
         product.changeInventory(quantity);
-        if(product.isTimeToReorder()) {
-          supplierService.order(product);
+        if (product.isTimeToReorder()) {
+            supplierService.order(product);
         }
         storeDAO.save(customer);
         storeDAO.save(product);

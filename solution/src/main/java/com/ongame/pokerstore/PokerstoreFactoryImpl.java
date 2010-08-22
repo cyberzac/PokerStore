@@ -25,17 +25,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//@Component
-public class PokerstoreFactoryImpl implements PokerstoreFactory{
+public class PokerstoreFactoryImpl implements PokerstoreFactory {
 
-    //@Autowired
     private BackOfficeService backOfficeService;
 
-    //@Autowired
     private StoreFrontService storeFrontService;
 
     public PokerstoreFactoryImpl() {
-        //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         backOfficeService = ctx.getBean(BackOfficeService.class);
         storeFrontService = ctx.getBean(StoreFrontService.class);
@@ -43,20 +39,20 @@ public class PokerstoreFactoryImpl implements PokerstoreFactory{
     }
 
     /**
-     * Return an instance (possibly shared or indenpendent) of the BackOffice Service.
+     * Return an instance (possibly shared or independent) of the BackOffice Service.
      *
      * @return an instance of the BackOffice Service
      */
     public BackOfficeService createBackOfficeService() {
-        return backOfficeService;  //Todo change body of implemented methods use File | Settings | File Templates.
+        return backOfficeService;
     }
 
     /**
-     * Return an instance (possibly shared or indenpendent) of the StoreFront Service.
+     * Return an instance (possibly shared or independent) of the StoreFront Service.
      *
      * @return an instance of the StoreFront Service
      */
     public StoreFrontService createStoreFrontService() {
-        return storeFrontService;  //Todo change body of implemented methods use File | Settings | File Templates.
+        return storeFrontService;
     }
 }

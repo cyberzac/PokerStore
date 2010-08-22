@@ -67,7 +67,6 @@
         <plugins>
             <!-- COMPILER - use 1.5 compability -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.5</source>
@@ -76,7 +75,6 @@
             </plugin>
             <!-- SUREFIRE (aka JUnit/TestNG) -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
@@ -88,7 +86,6 @@
             <!-- IDEA project files generation -->
             <!-- See: http://maven.apache.org/plugins/maven-idea-plugin/ -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-idea-plugin</artifactId>
                 <configuration>
                     <jdkName>1.5</jdkName>
@@ -101,7 +98,6 @@
             <!-- Eclipse project files generation -->
             <!-- See: http://maven.apache.org/plugins/maven-eclipse-plugin/ -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <configuration>
                     <useProjectReferences>false</useProjectReferences>
@@ -109,6 +105,31 @@
                     <downloadSources>true</downloadSources>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2-beta-5</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>project</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>single</goal>
+                            <!-- goals == mojos -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
     </build>
 
@@ -118,10 +139,6 @@
             <modules>
                 <module>api</module>
                 <module>solution</module>
-                <!--
-                <module>dist</module>
-                <module>reference</module>
-                -->
             </modules>
         </profile>
     </profiles>

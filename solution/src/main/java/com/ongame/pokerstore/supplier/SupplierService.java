@@ -28,5 +28,5 @@ public interface SupplierService {
     void order(Product product);
 
     public List<Product> getOrders();
-    
+
 }

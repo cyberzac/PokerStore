@@ -1,6 +1,8 @@
 package com.ongame.pokerstore.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -28,7 +30,8 @@ public class Customer implements Serializable {
     private String id;
     private double credit;
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public Customer(String name, double credit) {
         this.id = name;

@@ -24,9 +24,11 @@ import java.util.List;
 public interface StoreDAO {
 
     Product getProduct(String productId);
+
     Product save(Product product);
 
     Customer getCustomer(String customerId);
+
     Customer save(Customer customer);
 
     List<String> getOutOfStockProductIds();
