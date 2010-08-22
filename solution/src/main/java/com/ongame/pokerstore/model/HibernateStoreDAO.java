@@ -3,6 +3,7 @@ package com.ongame.pokerstore.model;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,7 @@ public class HibernateStoreDAO implements StoreDAO {
     private SessionFactory sessionFactory;
 
     public Product getProduct(String name) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Product product where product.name =?").setParameter(0, name);
+        Query query = sessionFactory.getCurrentSession().createQuery("from Product product where product.id =?").setParameter(0, name);
         return (Product) query.uniqueResult();
     }
 
@@ -45,7 +46,7 @@ public class HibernateStoreDAO implements StoreDAO {
     }
 
     public Customer getCustomer(String name) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Customer customer where customer.name =?").setParameter(0, name);
+        Query query = sessionFactory.getCurrentSession().createQuery("from Customer customer where customer.id =?").setParameter(0, name);
         return (Customer) query.uniqueResult();
     }
 
@@ -57,7 +58,7 @@ public class HibernateStoreDAO implements StoreDAO {
     @SuppressWarnings("unchecked")
     public List<String> getOutOfStockProductIds() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        criteria.add(Restrictions.le("inventory", 0L));
+        criteria.add(Restrictions.le("inventory", 0L)).setProjection(Projections.property("id"));
         return (List<String>) criteria.list();
     }
 }

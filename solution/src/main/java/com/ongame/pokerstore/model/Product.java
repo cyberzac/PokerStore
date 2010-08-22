@@ -24,8 +24,7 @@ import java.io.Serializable;
  */
 @Entity
 public class Product implements Serializable {
-    private long id;
-    private String name;
+    private String id;
     private double price;
     private long inventory;
 
@@ -33,28 +32,19 @@ public class Product implements Serializable {
     }
 
     public Product(String name, double price, long inventory) {
-        this.name = name;
+        this.id = name;
         this.price = price;
         this.inventory = inventory;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
+    @Column(unique = true)
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    @Column(unique = true)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {

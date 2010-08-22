@@ -54,7 +54,6 @@ public class SpringPokerstoreTest {
      */
     @Test
     public void normalFlow() {
-
         int quantity = 5;
         double credit = inventory * price * 2;
         backOfficeService.setCustomerCredit(CUSTOMER, credit);
@@ -117,11 +116,14 @@ public class SpringPokerstoreTest {
         backOfficeService.stock(hp, price, inventory);
         assertTrue("No products should be out of stock.", backOfficeService.getOutOfStock().isEmpty());
         backOfficeService.setCustomerCredit(CUSTOMER, price * inventory * 4);
+
         storeFrontService.purchase(DELL, CUSTOMER, inventory);
         List<String> outOfStock = backOfficeService.getOutOfStock();
         assertEquals("Wrong number of products out of stock", 1, outOfStock.size());
-        assertEquals("Expected " + DELL + " to be out of stock", DELL, outOfStock.get(1));
+        assertEquals("Expected " + DELL + " to be out of stock", DELL, outOfStock.get(0));
+
         storeFrontService.purchase(hp, CUSTOMER, inventory);
+        outOfStock = backOfficeService.getOutOfStock();
         assertEquals("Wrong number of products out of stock", 2, outOfStock.size());
         if (DELL.equals(outOfStock.get(0))) {
             assertEquals("Second product should be " + hp, hp, outOfStock.get(1));
@@ -130,5 +132,13 @@ public class SpringPokerstoreTest {
         } else {
             fail("Wrong products out of stock");
         }
+    }
+
+    /**
+     * Test concurrency
+     */
+    @Test
+    public void concurrency() {
+
     }
 }

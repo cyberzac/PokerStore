@@ -33,7 +33,7 @@ public class SupplierServiceImpl implements SupplierService {
     private List<Product> orders = new ArrayList<Product>();
 
     public void order(Product product) {
-        log.info("Time to order {} inventory is {}", product.getName(), product.getInventory());
+        log.info("Time to order {} inventory is {}", product.getId(), product.getInventory());
         orders.add(product);
     }
 
